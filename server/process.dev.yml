@@ -1,0 +1,19 @@
+apps:
+ - script   : ./app.js
+   name     : 'api'
+   instances:  1
+   exec_mode: cluster
+   watch:
+     - config
+     - libs
+     - middleware
+     - models
+     - routes
+     - vendors
+   args: 
+     - --color
+   error_file: ./logs/error.log
+   out_file: ./logs/access.log
+   env:
+     NODE_ENV: development
+     DEBUG_COLORS: true

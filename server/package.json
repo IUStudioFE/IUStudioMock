@@ -4,7 +4,17 @@
   "description": "mock server ",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "rm -rf ./logs/ && pm2 start process.dev.yml",
+    "start:local": "pm2 start process.dev.yml --no-daemon",
+    "start:prod": "pm2 start process.prod.yml",
+    "stop": "pm2 stop api",
+    "destroy": "pm2 delete api",
+    "flush": "pm2 flush",
+    "show": "pm2 show api",
+    "monitor": "pm2 monit",
+    "test": "mocha test --NODE_ENV=test",
+    "lint": "eslint .",
+    "validate": "npm ls"
   },
   "keywords": [
     "mock",
@@ -16,14 +26,31 @@
   "dependencies": {
     "bcrypt-as-promised": "^1.1.0",
     "chalk": "^1.1.3",
-    "koa": "^2.2.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-jwt": "^3.0.1",
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.2.0",
+    "koa-jwt": "^1.2.0",
+    "koa-mysql": "^1.0.3",
     "koa-router": "^5.4.0",
-    "lodash": "^4.17.4",
-    "log4js": "^1.1.1",
-    "moment": "^2.18.0",
-    "promise-redis": "0.0.5",
-    "sequelize": "^3.30.2"
-  }
+    "lodash": "^4.16.1",
+    "log4js": "^0.6.38",
+    "sequelize": "^3.24.3",
+    "thunkify": "^2.1.2",
+    "request": "^2.75.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "commander": "^2.9.0",
+    "eslint": "^3.6.0",
+    "eslint-config-standard": "^6.0.1",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "mocha": "^3.1.0",
+    "pm2": "^2.0.15",
+    "precommit-hook": "^3.0.0",
+    "supertest": "^2.0.0"
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }

@@ -13,8 +13,8 @@ const bootstrap = require('../config/bootstrap');
 module.exports = function(app, done) {
     configure.run(app, () => {
         middleware.run(app);
+        const server = app.listen(IUStudioMock.config.port);
         bootstrap();
-        const server = app.listen(MOCK.config.port);
         done && done(server);
     })
 }

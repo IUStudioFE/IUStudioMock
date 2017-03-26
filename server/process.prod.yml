@@ -1,0 +1,9 @@
+apps:
+ - script   : ./app.js
+   name     : 'api'
+   instances:  max
+   exec_mode: cluster
+   error_file: ./logs/error_prod.log
+   out_file: ./logs/access_prod.log
+   env:
+     NODE_ENV: production

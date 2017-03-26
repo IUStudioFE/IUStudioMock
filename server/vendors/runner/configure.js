@@ -16,12 +16,16 @@ const MODEL_PATH = path.join(__dirname, '../../models');
 const MODULE_PATH = path.join(__dirname, '../../modules');
 const SERVICE_PATH = path.join(__dirname, '../services');
 const ROUTES_PATH = path.join(__dirname, '../../routes');
+const CONTROLLERS_PATH = path.join(__dirname, '../../controllers');
+const CONSTANTS_PATH = path.join(__dirname, '../../constants');
+
 /**
  * 递归遍历目录，获得模块
  * @param basepath
  * @param cb
  * @private
  */
+
 function findModule(basepath, cb) {
     try {
         fs.accessSync(basepath);
@@ -53,40 +57,59 @@ function findModule(basepath, cb) {
  * @param cb
  */
 function configureModels(IUStudioMock, cb) {
-    IUStudioMock._models = {};
-    const defines = [];
-    findModule(MODEL_PATH, (model, file) => {
-        // 定义模型
-        const definition = model.definition;
-        if(definition) {
-            _.each((definition), (field) => {
-                const type = field.type.toUpperCase();
-                if(type === 'UUID') {
-                    field.defaultValue = Sequelize.UUIDV4;
-                }
-                field.type = Sequelize[type];
-            });
+   const relations = {};
+   IUStudioMock._models = {};
+   const defines = [];
+   findModule(MODEL_PATH, (model, file) => {
+       const { definition, relation, hooks } = model;
+       if(definition) {
+           _.each(definition, (field) => {
+               const type = field.type.toUpperCase();
+               const limit = field.limit;
+               switch(type) {
+                   case 'UUID':
+                       field.defaultValue = Sequelize.UUIDV4;
+                       break;
+               }
+               if(limit) {
+                   field.type = _.isArray(limit) ? Sequelize[type].call(null, limit) : Sequelize[type](limit);
+                   delete field.limit;
+               }else {
+                   field.type = Sequelize[type];
+               }
+           })
+           // 定义模型
+           const Model = IUStudioMock.sequelize.define(file, model.definition, {hooks});
+           if(relation) {
+               relations[file] = relation;
+           }
+           IUStudioMock._models[file] = Model;
+       }
+   });
 
-            const Model = IUStudioMock.sequelize.define(file, model.definition);
-            defines.push(Model.sync());
-            // 绑定模型方法的this到Model
-            _.functions(model).forEach((func) => {
-                model[func] = model[func].bind(Model);
-            })
-        }
-        Object.assign(IUStudioMock._models, { [file]: model })
-    });
-    IUStudioMock.getModel = function(modelName) {
-        return IUStudioMock._models[modelName];
-    };
+   // 校正关系
+   _.each(IUStudioMock._models, (model, key) => {
+       if(relations.hasOwnProperty(key)) {
+           const { type, linkTo } = relations[key];
+           if(type && linkTo) {
+               model[type](IUStudioMock._models[linkTo]);
+           }
+       }
+       defines.push(model.sync());
+   })
 
-    IUStudioMock.logger.info('-----Configure Models-----');
-    Promise.all(defines).then(() => {
-        IUStudioMock.logger.info('-----Configuring Models Ok!-----');
-        cb();
-    }).catch((error) => {
-        console.log(error);
-    })
+   // 构建各个模型间关系
+   IUStudioMock.getModel = function(modelName) {
+       return IUStudioMock._models[modelName];
+   }
+
+   IUStudioMock.logger.info('--Configuring Models');
+   Promise.all(defines).then(() => {
+       IUStudioMock.logger.info('--Configuring Models Successful!');
+       cb();
+   }).catch((err) => {
+       console.log(err);
+   })
 }
 
 /**
@@ -122,19 +145,50 @@ function configureMoules(IUStudioMock) {
  */
 function configureRoutes(IUStudioMock) {
     IUStudioMock._routes = {};
-    findModule(ROUTES_PATH, (module, file) => {
-        IUStudioMock._routes[file] = module;
+    findModule(ROUTES_PATH, (module, file, filePath) => {
+        // 考虑目录的二级结构
+        const names = filePath.split(path.sep);
+        const len = names.length;
+        const role = names[len - 2];
+        IUStudioMock._routes[`${role}/${file}`] = module;
     })
     return IUStudioMock;
 }
 
+/**
+ * 配置控制器
+ * @param IUStudioMock
+ */
+function configureControllers(IUStudioMock) {
+    IUStudioMock._controllers = {};
+    findModule(CONTROLLERS_PATH, (module, file, filePath) => {
+        const names = filePath.split(path.sep);
+        const len = names.length;
+        const role = names[len - 2];
+        IUStudioMock._controllers[`${role}/${file}`] = module;
+    })
+    return IUStudioMock;
+}
+
+/**
+ * 配置常量
+ * @param IUStudioMock
+ */
+function configureConstants(IUStudioMock) {
+    findModule(CONSTANTS_PATH, (constant, file) => {
+        const key = `$${file}`;
+        console.log('key', key);
+        IUStudioMock[key] = constant;
+    })
+    return IUStudioMock;
+}
 
 /**
  * 配置日志
  */
 function configureLogger() {
     // 检查是否有logs文件夹，没有则创建
-    conft logPath = path.join(__dirname, '../../logs');
+    const logPath = path.join(__dirname, '../../logs');
     if(!fs.existsSync(logPath)) {
         fs.mkdirSync(logPath);
     }
@@ -152,7 +206,7 @@ function configureLogger() {
         }, 
         {
             type: 'file',
-            filename: path.join(__dirname, '../../logs/app.log',
+            filename: path.join(__dirname, '../../logs/app.log'),
             maxLogSize: 20480,
             backups: 10,
             category: 'app'
@@ -162,16 +216,6 @@ function configureLogger() {
     log4js.configure({
         appenders,
         replacaConsole: false
-    })
-}
-
-/**
- * 配置错误捕获
- * @param app
- */
-function configureErrorHandling(app) {
-    app.on('error', function(err) {
-        IUStudioMock.logger.error('[app] server error', err);
     })
 }
 
@@ -188,16 +232,7 @@ function configureConfig(IUStudioMock) {
  * 配置数据库
  * @param IUStudioMock
  */
-/**
- * db: {
-        host: '127.0.0.1',
-        port: '3306',
-        usr: 'root',
-        password: 'wing',
-        database: 'iustudiomock',
-        dialect: 'mysql'
-    }
- */
+
 function configureDb(IUStudioMock) {
     const {database, host, port, user, password, dialect} = IUStudioMock.config.db;
     IUStudioMock.sequelize = new Sequelize(
@@ -218,13 +253,14 @@ module.exports = {
     run(app, cb) {
         global.IUStudioMock = {};
         configureLogger();
-        configureErrorHandling(app);
         _.flow([
             configureConfig,
+            configureConstants,
             configureDb,
             configureServices,
             configureMoules,
-            configureRoutes
+            configureRoutes,
+            configureControllers
         ])(IUStudioMock);
         configureModels(IUStudioMock, cb);
     }

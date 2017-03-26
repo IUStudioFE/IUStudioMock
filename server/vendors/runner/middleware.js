@@ -10,9 +10,9 @@ const middleware = require('../../config/middleware');
 module.exports = {
     run(app) {
         middleware.order.forEach((middle) => {
-            if(middleware.hasOwnProperty(middle) {
+            if(middleware.hasOwnProperty(middle)) {
                 app.use(middleware[middle]());
-            }) else {
+            } else {
                 app.use(require(middle)());
             }
         })

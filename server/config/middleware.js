@@ -3,9 +3,8 @@
  * @description 中间件配置
  * @author wing
  */
-const { validator, router } = require('../vendors/middlwares');
+const { validator, router, error, logger } = require('../vendors/middlewares');
 const jwt = require('koa-jwt');
-const path = require('path');
 
 const apiConfig = require('../config/api');
 
@@ -14,17 +13,21 @@ module.exports = {
 
     order: [
         'koa-bodyparser',
+        'error',
         'jwt',
-        'valiator',
-        'router'
+        'validator',
+        'router',
+        'logger'
     ],
     
     jwt: function() {
         const { prefix, version } = apiConfig;
         const authRouteRegex = new RegExp(`^/${prefix}/${version}/auth/`);
-        return jwt({secret: IUStudioMock.secret}).unless({path: [authRouteRegex]})
+        return jwt({secret: IUStudioMock.config.secret}).unless({path: [authRouteRegex]})
     },
 
-    valiator,
-    router
+    validator,
+    router,
+    logger,
+    error
 }
