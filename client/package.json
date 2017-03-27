@@ -4,7 +4,9 @@
   "description": "mock server front end client",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./dist/",
+    "copy": "cp ./src/index.html ./dist && cp -rf ./src/vendor ./dist",
+    "dev": "npm run copy && node ./webpack-dev-server.js"
   },
   "keywords": [
     "mockserver",
@@ -12,5 +14,31 @@
     "react"
   ],
   "author": "wing",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-2": "^6.13.0",
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.28.0",
+    "postcss-loader": "^0.9.1",
+    "webpack": "^2.3.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "handlebars-loader": "^1.4.0",
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-hot-loader": "^1.3.1",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "redux": "^3.6.0",
+    "sass-loader": "^6.0.3",
+    "url-loader": "^0.5.8",
+    "webpack-dev-server": "^2.4.2"
+  }
 }

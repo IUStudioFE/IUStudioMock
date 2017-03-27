@@ -1,0 +1,18 @@
+{
+  "presets": [
+    ["es2015", {"modules": false}],
+    // webpack 现在已经支持原生的 import 语句了, 并且将其运用在 tree-shaking 特性上
+
+    "stage-2",
+    // 指定要启用的语言规范级别
+    // Stage 2 代表“草案”，4 是“已完成”，0 是“稻草人(strawman)”。
+    // 详情查看 https://tc39.github.io/process-document/
+
+    "react"
+    // 转译 React 组件为 JavaScript 代码
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+    // 开启 React 代码的模块热替换(HMR)
+  ]
+}
