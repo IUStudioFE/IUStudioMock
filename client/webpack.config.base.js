@@ -9,7 +9,7 @@ const webpack = require('webpack');
 module.exports = function() {
     return {
         entry: [
-            path.resolve(__dirname, 'src/js')
+            path.resolve(__dirname, 'src/js/index.js')
         ],
         output: {
             path: path.resolve(__dirname, 'dist/assets/js'),

@@ -7,7 +7,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackDevServer = require('webpack-dev-server');
 
-const webpackConfig = require('./webpack.config.dev');
+const webpackConfig = require('./webpack.config.dev')();
 
 const devServerConfig = {
     hot: true,
@@ -20,10 +20,9 @@ const devServerConfig = {
     // ...   
     // } 
 };
-
 const port = 9001;
 
-const compiler = webpack(webpackConfig());
+const compiler = webpack(webpackConfig);
 const server = new webpackDevServer(compiler, devServerConfig);
 server.listen(port, err => {
     if(err) {

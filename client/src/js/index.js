@@ -3,7 +3,7 @@
  * @description app入口文件
  * @author wing
  */
-import 'react-hot-loader/patch';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 

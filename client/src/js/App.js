@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                hello, world
+                hello, IUStudio-Mock-Server
             </div>
         )
     }

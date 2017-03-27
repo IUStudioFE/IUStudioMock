@@ -6,7 +6,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const base = require('./webpack.config.base');
+const base = require('./webpack.config.base')();
 
 const publicToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJwdWJsaWMiLCJpYXQiOjE0OTA1Mjc0Mzd9.hMWrMcFCRtQmLOJjbVYre4XDIfRzuAJ1ZmG3izapoy8';
 
@@ -14,10 +14,10 @@ module.exports = function() {
     return Object.assign({}, base, {
         devtool: 'cheap-module-eval-source-map',
         entry: [
-            path.resolve(__dirname, 'src/js'),
             'react-hot-loader/patch',
             'webpack-dev-server/client?http://0.0.0.0:9001',
-            'webpack/hot/only-dev-server'
+            'webpack/hot/only-dev-server',
+            path.resolve(__dirname, 'src/js/index.js')
         ],
         output: {
             path: path.resolve(__dirname, 'dist/assets/js'),
