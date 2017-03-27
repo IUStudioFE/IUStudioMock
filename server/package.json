@@ -21,6 +21,7 @@
     "server",
     "koa"
   ],
+  "git": "https://github.com/IUStudioFE/IUStudioMock/blob/master/server/",
   "author": "wing",
   "license": "ISC",
   "dependencies": {
