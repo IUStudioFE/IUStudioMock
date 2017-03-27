@@ -4,7 +4,7 @@
  * @author wing
  */
 module.exports = {
-    port: 4000,
+    port: 4001,
     secret: 'IUStudio.mock.server.dev',
     privateKeyTimeout: Infinity,
     publicToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJwdWJsaWMiLCJpYXQiOjE0OTA1Mjc0Mzd9.hMWrMcFCRtQmLOJjbVYre4XDIfRzuAJ1ZmG3izapoy8',

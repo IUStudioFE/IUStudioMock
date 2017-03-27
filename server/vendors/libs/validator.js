@@ -46,18 +46,39 @@ function validateLength(value, limit, type) {
     }
 }
 
+/**
+ * 验证是否满足对应正则
+ * @param regex
+ * @param value
+ */
+function validateRegex(value, regex) {
+    let regexp;
+    if(isString(regex)) {
+        const match = regex.match(new RegExp('^/(.*?)/([gimy]*)$'));
+        regexp = new RegExp(match[1], match[2]);
+    } else if(isRegExp(regex)) {
+        regexp = regex;
+    }
+
+    return regexp ? regexp.test(value) : false;
+}
+
 function _validate(value, rules, data) {
+    //cascsd [ 'notEmpty', 'maxLength[20]' ] { username: 'cascsd', password: '' }
+    console.log(value);
+    console.log(rules)
+    console.log(data);
     let msg = '';
     let valid = rules.every((rule) => {
         msg = rule;
         // 如果是自定义的函数验证
-        if(!isFunction(rule)) {
+        if(isFunction(rule)) {
             return rule(value);
         }
         const matched = rule.match(ruleRegex);
         const criteria = matched[1];
         const limit = matched[2];
-
+        console.log(matched, 'rr');
         switch(criteria) {
             case 'notEmpty': 
                 return validateNotEmpty(value);
@@ -67,10 +88,13 @@ function _validate(value, rules, data) {
                 return validateLength(value, limit, 'exact');
             case 'maxLength':
                 return validateLength(value, limit, 'max');
+            case 'regex':
+                return validateRegex(value, limit);
             default:
                 return true;
         }
     })
+    console.log(msg, 11, !valid);
     return {error: !valid, msg}
 }
 

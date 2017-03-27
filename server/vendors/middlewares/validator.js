@@ -14,7 +14,9 @@ module.exports = function() {
     return function *(next) {
         // 获得请求体
         const { body } = this.request;
-        const url = this.request.url.replace(`${prefix}/${version}`, '');
+        console.log(body, 1);
+        const url = this.request.url.replace(`/${prefix}/${version}`, '');
+        console.log(url);
         let routeKey = null;
         // 获得当前请求的路由
         let routeObj = _.filter(IUStudioMock._routes, (value, key) => {
@@ -25,7 +27,7 @@ module.exports = function() {
 
         if(routeObj) {
             const route = _.filter(routeObj, (value, key) => {
-                const regx = new RegExp(`^/${routeKey}/${value.url || key}[/]{0, 1}`);
+                const regex = new RegExp(`^/${routeKey}/${value.url || key}[/]{0,1}`);
                 return regex.test(url);
             })[0]
             if(!route) {
@@ -34,7 +36,8 @@ module.exports = function() {
                 // 组包
                 const acceptParams = Object.keys(route.rules);
                 const data = _.pick(body, acceptParams);
-
+                console.log(acceptParams, 'acceptParams');
+                console.log(data, 'data');
                 // 校验
                 if (!_.isEmpty(route.rules)) {
                     const errMap = yield validate(data, route.rules);

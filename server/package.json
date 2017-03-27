@@ -49,8 +49,5 @@
     "pm2": "^2.0.15",
     "precommit-hook": "^3.0.0",
     "supertest": "^2.0.0"
-  },
-  "pre-commit": [
-    "lint"
-  ]
+  }
 }

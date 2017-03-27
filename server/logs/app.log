@@ -1,0 +1,73 @@
+[2017-03-27 16:13:20.801] [INFO] app - --Configuring Models
+[2017-03-27 16:13:20.905] [INFO] app - --Configuring Models Successful!
+[2017-03-27 16:13:22.718] [ERROR] app - [REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascsd",
+	"password": ""
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+[2017-03-27 16:13:36.440] [ERROR] app - [REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascsd",
+	"password": ""
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+[2017-03-27 16:16:28.469] [ERROR] app - [REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascd",
+	"password": "cdcd"
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+[2017-03-27 16:16:37.477] [DEBUG] app - [REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascd",
+	"password": "$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy"
+}
+[4mresponse:[24m
+{
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiY2ZhZjVjNjktYTBiNS00MmIwLWE0MjctN2IxYWJiZGQ4YWUzIiwiaWF0IjoxNDkwNjAyNTk3fQ.IVjmvwR29vanK14G7lB7-JTfsGEGV7ONqhtmb1de8YE"
+}
+[2017-03-27 16:17:11.450] [DEBUG] app - [REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "wangning",
+	"password": "$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G"
+}
+[4mresponse:[24m
+{
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiZmU1OWJlMGYtNDMyZS00NmFkLWE5NjYtYzA3MTljZjY5MDUyIiwiaWF0IjoxNDkwNjAyNjMxfQ.spaCSYrMZedZ6zA-tsyKyXJet0apLBuIkNnKLkgJ8Bk"
+}

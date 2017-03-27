@@ -1,0 +1,344 @@
+key $errors
+[32m[2017-03-27 16:13:20.801] [INFO] app - [39m--Configuring Models
+Executing (default): CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER auto_increment , `uuid` CHAR(36) BINARY, `username` VARCHAR(20) NOT NULL UNIQUE, `password` VARCHAR(255) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, UNIQUE `users_username_unique` (`username`), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `users`
+[32m[2017-03-27 16:13:20.905] [INFO] app - [39m--Configuring Models Successful!
+[34m/***************************************************************************[39m
+[34m/*                                                                         *[39m
+[34m/* IUStuio Mock Server is Running                                          *[39m
+[34m/*                                                                         *[39m
+[34m/***************************************************************************[39m
+{ username: 'cascsd', password: '' } 1
+/passport/auth/signUp
+[ 'username', 'password' ] 'acceptParams'
+{ username: 'cascsd', password: '' } 'data'
+cascsd
+[ 'notEmpty', 'maxLength[20]' ]
+{ username: 'cascsd', password: '' }
+[ 'notEmpty', 'notEmpty', undefined, index: 0, input: 'notEmpty' ] 'rr'
+[ 'maxLength[20]',
+  'maxLength',
+  '20',
+  index: 0,
+  input: 'maxLength[20]' ] 'rr'
+maxLength[20] 11 false
+
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ]
+{ username: 'cascsd', password: '' }
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]',
+  'regex',
+  '/^[a-zA-Z0-9_]{6,18}$/',
+  index: 0,
+  input: 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ] 'rr'
+regex[/^[a-zA-Z0-9_]{6,18}$/] 11 true
+{ status: 400,
+  msg: 'validate parameters failed',
+  code: 1001,
+  body: { invalids: [ '参数 [password] 的规则 [\'regex[/^[a-zA-Z0-9_]{6,18}$/]\'] 不通过' ] } }
+[31m[2017-03-27 16:13:22.718] [ERROR] app - [39m[REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascsd",
+	"password": ""
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+{ username: 'cascsd', password: '' } 1
+/passport/auth/signUp
+[ 'username', 'password' ] 'acceptParams'
+{ username: 'cascsd', password: '' } 'data'
+cascsd
+[ 'notEmpty', 'maxLength[20]' ]
+{ username: 'cascsd', password: '' }
+[ 'notEmpty', 'notEmpty', undefined, index: 0, input: 'notEmpty' ] 'rr'
+[ 'maxLength[20]',
+  'maxLength',
+  '20',
+  index: 0,
+  input: 'maxLength[20]' ] 'rr'
+maxLength[20] 11 false
+
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ]
+{ username: 'cascsd', password: '' }
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]',
+  'regex',
+  '/^[a-zA-Z0-9_]{6,18}$/',
+  index: 0,
+  input: 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ] 'rr'
+regex[/^[a-zA-Z0-9_]{6,18}$/] 11 true
+{ status: 400,
+  msg: 'validate parameters failed',
+  code: 1001,
+  body: { invalids: [ '参数 [password] 的规则 [\'regex[/^[a-zA-Z0-9_]{6,18}$/]\'] 不通过' ] } }
+[31m[2017-03-27 16:13:36.440] [ERROR] app - [39m[REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascsd",
+	"password": ""
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+{ username: 'cascd', password: 'cdcd' } 1
+/passport/auth/signUp
+[ 'username', 'password' ] 'acceptParams'
+{ username: 'cascd', password: 'cdcd' } 'data'
+cascd
+[ 'notEmpty', 'maxLength[20]' ]
+{ username: 'cascd', password: 'cdcd' }
+[ 'notEmpty', 'notEmpty', undefined, index: 0, input: 'notEmpty' ] 'rr'
+[ 'maxLength[20]',
+  'maxLength',
+  '20',
+  index: 0,
+  input: 'maxLength[20]' ] 'rr'
+maxLength[20] 11 false
+cdcd
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ]
+{ username: 'cascd', password: 'cdcd' }
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]',
+  'regex',
+  '/^[a-zA-Z0-9_]{6,18}$/',
+  index: 0,
+  input: 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ] 'rr'
+regex[/^[a-zA-Z0-9_]{6,18}$/] 11 true
+{ status: 400,
+  msg: 'validate parameters failed',
+  code: 1001,
+  body: { invalids: [ '参数 [password] 的规则 [\'regex[/^[a-zA-Z0-9_]{6,18}$/]\'] 不通过' ] } }
+[31m[2017-03-27 16:16:28.469] [ERROR] app - [39m[REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascd",
+	"password": "cdcd"
+}
+[4merror:[24m
+{
+	"status": 400,
+	"msg": "validate parameters failed",
+	"code": 1001,
+	"body": {
+		"invalids": [
+			"参数 [password] 的规则 ['regex[/^[a-zA-Z0-9_]{6,18}$/]'] 不通过"
+		]
+	}
+}
+{ username: 'cascd', password: 'cdcdcacd' } 1
+/passport/auth/signUp
+[ 'username', 'password' ] 'acceptParams'
+{ username: 'cascd', password: 'cdcdcacd' } 'data'
+cascd
+[ 'notEmpty', 'maxLength[20]' ]
+{ username: 'cascd', password: 'cdcdcacd' }
+[ 'notEmpty', 'notEmpty', undefined, index: 0, input: 'notEmpty' ] 'rr'
+[ 'maxLength[20]',
+  'maxLength',
+  '20',
+  index: 0,
+  input: 'maxLength[20]' ] 'rr'
+maxLength[20] 11 false
+cdcdcacd
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ]
+{ username: 'cascd', password: 'cdcdcacd' }
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]',
+  'regex',
+  '/^[a-zA-Z0-9_]{6,18}$/',
+  index: 0,
+  input: 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ] 'rr'
+regex[/^[a-zA-Z0-9_]{6,18}$/] 11 false
+[Function]
+$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy
+Executing (default): INSERT INTO `users` (`id`,`uuid`,`username`,`password`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'cfaf5c69-a0b5-42b0-a427-7b1abbdd8ae3','cascd','$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy','2017-03-27 08:16:37','2017-03-27 08:16:37');
+Instance {
+  dataValues: 
+   { uuid: 'cfaf5c69-a0b5-42b0-a427-7b1abbdd8ae3',
+     id: 18,
+     username: 'cascd',
+     password: '$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy',
+     updatedAt: 2017-03-27T08:16:37.000Z,
+     createdAt: 2017-03-27T08:16:37.000Z },
+  _previousDataValues: 
+   { username: 'cascd',
+     password: '$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy',
+     id: 18,
+     uuid: 'cfaf5c69-a0b5-42b0-a427-7b1abbdd8ae3',
+     createdAt: 2017-03-27T08:16:37.000Z,
+     updatedAt: 2017-03-27T08:16:37.000Z },
+  _changed: 
+   { username: false,
+     password: false,
+     id: false,
+     uuid: false,
+     createdAt: false,
+     updatedAt: false },
+  '$modelOptions': 
+   { timestamps: true,
+     instanceMethods: {},
+     classMethods: {},
+     validate: {},
+     freezeTableName: false,
+     underscored: false,
+     underscoredAll: false,
+     paranoid: false,
+     rejectOnEmpty: false,
+     whereCollection: null,
+     schema: null,
+     schemaDelimiter: '',
+     defaultScope: {},
+     scopes: [],
+     hooks: {},
+     indexes: [],
+     name: { plural: 'users', singular: 'user' },
+     omitNul: false,
+     sequelize: 
+      Sequelize {
+        options: [Object],
+        config: [Object],
+        dialect: [Object],
+        models: [Object],
+        modelManager: [Object],
+        connectionManager: [Object],
+        importCache: {},
+        test: [Object],
+        queryInterface: [Object] },
+     uniqueKeys: { users_username_unique: [Object] },
+     hasPrimaryKeys: true },
+  '$options': 
+   { isNewRecord: true,
+     '$schema': null,
+     '$schemaDelimiter': '',
+     attributes: undefined,
+     include: undefined,
+     raw: undefined,
+     silent: undefined },
+  hasPrimaryKeys: true,
+  __eagerlyLoadedAssociations: [],
+  isNewRecord: false }
+[36m[2017-03-27 16:16:37.477] [DEBUG] app - [39m[REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "cascd",
+	"password": "$2a$10$y0ry4tMerj4sbTl.9xErV.6h5zrJ3tFRYTV4LWXzvbwZH/o.YDKSy"
+}
+[4mresponse:[24m
+{
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiY2ZhZjVjNjktYTBiNS00MmIwLWE0MjctN2IxYWJiZGQ4YWUzIiwiaWF0IjoxNDkwNjAyNTk3fQ.IVjmvwR29vanK14G7lB7-JTfsGEGV7ONqhtmb1de8YE"
+}
+{ username: 'wangning', password: '123456' } 1
+/passport/auth/signUp
+[ 'username', 'password' ] 'acceptParams'
+{ username: 'wangning', password: '123456' } 'data'
+wangning
+[ 'notEmpty', 'maxLength[20]' ]
+{ username: 'wangning', password: '123456' }
+[ 'notEmpty', 'notEmpty', undefined, index: 0, input: 'notEmpty' ] 'rr'
+[ 'maxLength[20]',
+  'maxLength',
+  '20',
+  index: 0,
+  input: 'maxLength[20]' ] 'rr'
+maxLength[20] 11 false
+123456
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ]
+{ username: 'wangning', password: '123456' }
+[ 'regex[/^[a-zA-Z0-9_]{6,18}$/]',
+  'regex',
+  '/^[a-zA-Z0-9_]{6,18}$/',
+  index: 0,
+  input: 'regex[/^[a-zA-Z0-9_]{6,18}$/]' ] 'rr'
+regex[/^[a-zA-Z0-9_]{6,18}$/] 11 false
+[Function]
+$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G
+Executing (default): INSERT INTO `users` (`id`,`uuid`,`username`,`password`,`createdAt`,`updatedAt`) VALUES (DEFAULT,'fe59be0f-432e-46ad-a966-c0719cf69052','wangning','$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G','2017-03-27 08:17:11','2017-03-27 08:17:11');
+Instance {
+  dataValues: 
+   { uuid: 'fe59be0f-432e-46ad-a966-c0719cf69052',
+     id: 19,
+     username: 'wangning',
+     password: '$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G',
+     updatedAt: 2017-03-27T08:17:11.000Z,
+     createdAt: 2017-03-27T08:17:11.000Z },
+  _previousDataValues: 
+   { username: 'wangning',
+     password: '$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G',
+     id: 19,
+     uuid: 'fe59be0f-432e-46ad-a966-c0719cf69052',
+     createdAt: 2017-03-27T08:17:11.000Z,
+     updatedAt: 2017-03-27T08:17:11.000Z },
+  _changed: 
+   { username: false,
+     password: false,
+     id: false,
+     uuid: false,
+     createdAt: false,
+     updatedAt: false },
+  '$modelOptions': 
+   { timestamps: true,
+     instanceMethods: {},
+     classMethods: {},
+     validate: {},
+     freezeTableName: false,
+     underscored: false,
+     underscoredAll: false,
+     paranoid: false,
+     rejectOnEmpty: false,
+     whereCollection: null,
+     schema: null,
+     schemaDelimiter: '',
+     defaultScope: {},
+     scopes: [],
+     hooks: {},
+     indexes: [],
+     name: { plural: 'users', singular: 'user' },
+     omitNul: false,
+     sequelize: 
+      Sequelize {
+        options: [Object],
+        config: [Object],
+        dialect: [Object],
+        models: [Object],
+        modelManager: [Object],
+        connectionManager: [Object],
+        importCache: {},
+        test: [Object],
+        queryInterface: [Object] },
+     uniqueKeys: { users_username_unique: [Object] },
+     hasPrimaryKeys: true },
+  '$options': 
+   { isNewRecord: true,
+     '$schema': null,
+     '$schemaDelimiter': '',
+     attributes: undefined,
+     include: undefined,
+     raw: undefined,
+     silent: undefined },
+  hasPrimaryKeys: true,
+  __eagerlyLoadedAssociations: [],
+  isNewRecord: false }
+[36m[2017-03-27 16:17:11.450] [DEBUG] app - [39m[REQUEST] [43m[30m/api/v1/passport/auth/signUp[39m[49m:
+[4mparams:[24m
+{
+	"username": "wangning",
+	"password": "$2a$10$33t1m0FjY5FSWv88t4TVfu2kz74bN6WZJt4V45IvLyqWrKEgU2k.G"
+}
+[4mresponse:[24m
+{
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1dWlkIjoiZmU1OWJlMGYtNDMyZS00NmFkLWE5NjYtYzA3MTljZjY5MDUyIiwiaWF0IjoxNDkwNjAyNjMxfQ.spaCSYrMZedZ6zA-tsyKyXJet0apLBuIkNnKLkgJ8Bk"
+}
