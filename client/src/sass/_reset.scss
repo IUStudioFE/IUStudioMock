@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    display: block;
+    width: 100%;
+    @include clearfix;
+}

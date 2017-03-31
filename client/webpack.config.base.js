@@ -26,7 +26,7 @@ module.exports = function() {
         externals: {
             'react': 'React',
             'react-dom': 'ReactDOM',
-            'react-router': 'ReactRouter',
+            'react-router-dom': 'ReactRouterDOM',
             'redux': 'Redux',
             'react-redux': 'ReactRedux',
             'lodash': '_',
@@ -40,7 +40,7 @@ module.exports = function() {
                 ],
                 exclude: /node_modules/
             }, {
-                test: /.css$/,
+                test: /\.css$/,
                 use: [
                     'style-loader',
                     {
@@ -52,7 +52,7 @@ module.exports = function() {
                     'postcss-loader'
                 ]
             }, {
-                test: /.s[ca]ss$/,
+                test: /\.scss$/,
                 use: [
                     'style-loader',
                     {

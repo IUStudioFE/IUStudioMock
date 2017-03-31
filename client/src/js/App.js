@@ -3,16 +3,14 @@
  * @description app主文件
  * @author wing
  */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                hello, IUStudio-Mock-Server
-            </div>
-        )
-    }
+import Routes from './routes';
+
+export default class App extends Component {
+  render() {
+    return (
+        <Routes />
+    );
+  }
 }
-
-export default App;
