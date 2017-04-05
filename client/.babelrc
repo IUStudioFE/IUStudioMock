@@ -12,7 +12,12 @@
     // 转译 React 组件为 JavaScript 代码
   ],
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "lib",   // default: lib
+      "style": true
+    }]
     // 开启 React 代码的模块热替换(HMR)
   ]
 }

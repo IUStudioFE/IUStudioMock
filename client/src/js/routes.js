@@ -4,19 +4,30 @@
  * @author wing
  */
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 
-import asyncComponent from './common/components/asyncComponent';
+function errorLoading(err) {
+ console.error('Dynamic page loading failed', err);
+}
 
 
-const Login = asyncComponent(() =>
-  System.import('./Login').then(module => module.default)
+function loadRoute(cb) {
+ return (module) => cb(null, module.default);
+}
+
+export default (
+  <Router history={browserHistory}>
+    <Route 
+      path="/login"
+      getComponent={(location, cb) => {
+        System.import('./Login').then(loadRoute(cb)).catch(errorLoading);
+      }}
+    />
+     <Route 
+      path="/"
+      getComponent={(location, cb) => {
+        System.import('./App.js').then(loadRoute(cb)).catch(errorLoading);
+      }}
+    />
+  </Router>
 )
-
-const Routes = () => (
-  <Switch>
-    <Route path="/login" component={Login} />
-  </Switch>
-);
-
-export default Routes;

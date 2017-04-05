@@ -4,11 +4,16 @@
  * @author wing
  */
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 
+import routes from './routes';
+import store from './store';
 export default class App extends Component {
   render() {
     return (
-       <div>lalala</div>
+       <Provider store={store}>
+          {routes}
+      </Provider>
     );
   }
 }

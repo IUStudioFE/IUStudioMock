@@ -15,10 +15,18 @@ const devServerConfig = {
     host: '0.0.0.0',
     publicPath: '/webpack/',
     stats: { colors: true },
-    historyApiFallback: true
-    // proxy: {
-    // ...   
-    // } 
+    historyApiFallback: true,
+    proxy: {
+        '/api': {
+            target: {
+                host: 'localhost',
+                protocol: 'http:',
+                port: 4001
+            },
+            changeOrigin: true,
+            secure: false,
+        }
+    } 
 };
 const port = 9001;
 

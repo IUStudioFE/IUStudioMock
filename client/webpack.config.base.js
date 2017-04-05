@@ -20,13 +20,13 @@ module.exports = function() {
         resolve: {
             extensions: ['.js', '.jsx'],
             alias: {
-
+                $utils: path.resolve(__dirname, 'src/js/utils')
             }
         },
         externals: {
             'react': 'React',
             'react-dom': 'ReactDOM',
-            'react-router-dom': 'ReactRouterDOM',
+            'react-router': 'ReactRouter',
             'redux': 'Redux',
             'react-redux': 'ReactRedux',
             'lodash': '_',
@@ -68,6 +68,19 @@ module.exports = function() {
                 test: /\.(jpg|png)$/,
                 use: [
                     'url-loader?limit=8192'
+                ]
+            }, {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    'postcss-loader',
+                    'less-loader'
                 ]
             }]
         },
