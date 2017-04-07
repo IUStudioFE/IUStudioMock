@@ -5,31 +5,63 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 // import { Provider } from 'react-redux';
 // import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 // AppContainer 是一个 HMR 必须的包裹(wrapper)组件
 
-import Root from './Root';
+// import Root from './Root';
 import '../sass/main.scss';
+import routes from './routes';
+import store from './store';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 
-// import routes from './routes';
-
-const render = (Component) => {
+/*const render = (Component, routes) => {
   ReactDOM.render(
     <AppContainer>
-        <Component />
+        <Component routes={routes} />
     </AppContainer>,
     document.getElementById('app')
   );
 };
 
-render(Root);
+render(Root, routes);*/
+
+render(
+  <Provider store={store}>
+    {routes(browserHistory)}
+  </Provider>,
+  document.getElementById('app')
+)
 
 // 模块热替换的 API
+/*if (module.hot) {
+  module.hot.accept('./Root', () => {
+    ReactDOM.render(
+      <AppContainer>
+        <Root routes={require('./routes').default} />,
+      </AppContainer>,
+      document.getElementById('app')
+    )
+  });
+}*/
+
 if (module.hot) {
-  module.hot.accept('./App', () => {
-    render(Root)
+  import('react-hot-loader').then(({ AppContainer }) => {
+    module.hot.accept('./routes', () => {
+      import('./routes')
+      .then((routerModule) => {
+        render(
+          <AppContainer key={module.hot ? new Date() : undefined}>
+            <Provider store={store}>
+              {routerModule.default(browserHistory)}
+            </Provider>
+          </AppContainer>,
+          document.getElementById('app')
+        );
+      });
+    });
   });
 }
